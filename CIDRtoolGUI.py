@@ -7,7 +7,7 @@ root = Tk()
 # root window title and dimension
 root.title("Jeroen's CIDR tool 1.1")
 # Set geometry (widthxheight)
-root.geometry('800x600')
+root.geometry('400x300')
  
 # Adding  labels and entries to the root window
 intro = Label(root, text = "Welcome to CIDR subnetting tool!")
@@ -198,6 +198,12 @@ def hosts(mask):
 # or no number at all
 # Also calls all CIDR functions to display outcome after button is clicked
 def clicked():
+    # Emptying all labels so when error message appears it's clean
+    fullip.config(text = "")
+    subnetmask.config(text= "")
+    networkadress.config(text = "")
+    broadcastadress.config(text= "")
+    hostnumber.config(text = "")
     try:
         if int(ip1.get()) > 255 or int(ip2.get()) > 255 or int(ip3.get()) > 255 or int(ip4.get()) > 255:
             fullip.configure(text = "Invalid IP or bit mask number" , fg = "red")
@@ -219,7 +225,7 @@ def clicked():
             broadcastadress.configure(text = "Broadcast adress is: "+str(bca1)+"."+str(bca2)+"."+str(bca3)+"."+str(bca4), fg = "black")
             broadcastadress.grid(column = 0, row = 5, columnspan = 7)
             host = hosts(mask)
-            hostnumber.configure(text = "Maximum number of hosts in a subnet: "+str(host) , fg = "black")
+            hostnumber.configure(text = "Maximum number of hosts per subnet: "+str(host) , fg = "black")
             hostnumber.grid(column = 0, row = 6, columnspan= 7)
 
     except ValueError:
