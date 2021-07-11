@@ -46,11 +46,20 @@ smask.grid(column = 9, row = 1)
 lbl4 = Label(root, text = "  ")
 lbl4.grid(column = 10, row = 1)
 
+empty = Label(root, text = "")
+empty.grid(column = 0, row = 2)
+
+fullipt = Label(root)
+subnetmaskt = Label(root)
+networkadresst = Label(root)
+broadcastadresst = Label(root)
+hostnumbert = Label(root)
 fullip = Label(root)
 subnetmask = Label(root)
 networkadress = Label(root)
 broadcastadress = Label(root)
 hostnumber = Label(root)
+
 
 # CIDR functions:
 
@@ -199,38 +208,64 @@ def hosts(mask):
 # Also calls all CIDR functions to display outcome after button is clicked
 def clicked():
     # Emptying all labels so when error message appears it's clean
+    fullipt.config(text = "")
+    subnetmaskt.config(text= "")
+    networkadresst.config(text = "")
+    broadcastadresst.config(text= "")
+    hostnumbert.config(text = "")
     fullip.config(text = "")
     subnetmask.config(text= "")
     networkadress.config(text = "")
     broadcastadress.config(text= "")
     hostnumber.config(text = "")
+    
+    # Try for checking if input is valid
     try:
         if int(ip1.get()) > 255 or int(ip2.get()) > 255 or int(ip3.get()) > 255 or int(ip4.get()) > 255:
             fullip.configure(text = "Invalid IP or bit mask number" , fg = "red")
-            fullip.grid(column = 0, row = 2, columnspan= 7)
+            fullip.grid(column = 0, row = 3, columnspan= 7)
         elif int(smask.get()) < 0 or int(smask.get()) > 31:
             fullip.configure(text = "Invalid IP or bit mask number" , fg = "red")
-            fullip.grid(column = 0, row = 2, columnspan= 7)
+            fullip.grid(column = 0, row = 3, columnspan= 7)
         else:
-            fullip.configure(text = "Your IP is: "+ip1.get()+"."+ip2.get()+"."+ip3.get()+"."+ip4.get(), fg = "black")
-            fullip.grid(column = 0, row = 2, columnspan= 7)
+
+            fullipt.configure(text = "Your IP is: ", fg = "black")
+            fullipt.grid(column = 0, row = 3, columnspan= 7, sticky = "w")
+            fullip.configure(text = ip1.get()+"."+ip2.get()+"."+ip3.get()+"."+ip4.get(), fg = "black")
+            fullip.grid(column = 4, row = 3, columnspan= 7, sticky = "w")
+            
             mask = int(smask.get())
             snm1,snm2,snm3,snm4 = submask(mask)
-            subnetmask.configure(text = "Subnet mask is: "+str(snm1)+"."+str(snm2)+"."+str(snm3)+"."+str(snm4), fg = "black")
-            subnetmask.grid(column = 0, row = 3, columnspan = 7)
+            
+            subnetmaskt.configure(text = "Subnet mask is: ", fg = "black")
+            subnetmaskt.grid(column = 0, row = 4, columnspan = 7, sticky = "w")
+            subnetmask.configure(text = str(snm1)+"."+str(snm2)+"."+str(snm3)+"."+str(snm4), fg = "black")
+            subnetmask.grid(column = 4, row = 4, columnspan = 7, sticky = "w")
+            
             nwa1,nwa2,nwa3,nwa4 = netwadr(mask,snm1,snm2,snm3,snm4)
-            networkadress.configure(text = "Network adress is: "+str(nwa1)+"."+str(nwa2)+"."+str(nwa3)+"."+str(nwa4), fg = "black")
-            networkadress.grid(column = 0, row = 4, columnspan = 7)
+            
+            networkadresst.configure(text = "Network adress is: ", fg = "black")
+            networkadresst.grid(column = 0, row = 5, columnspan = 7, sticky = "w")
+            networkadress.configure(text = str(nwa1)+"."+str(nwa2)+"."+str(nwa3)+"."+str(nwa4), fg = "black")
+            networkadress.grid(column = 4, row = 5, columnspan = 7, sticky = "w")
+            
             bca1,bca2,bca3,bca4 = bcadr(mask,snm1,snm2,snm3,snm4)
-            broadcastadress.configure(text = "Broadcast adress is: "+str(bca1)+"."+str(bca2)+"."+str(bca3)+"."+str(bca4), fg = "black")
-            broadcastadress.grid(column = 0, row = 5, columnspan = 7)
+            
+            broadcastadresst.configure(text = "Broadcast adress is: ", fg = "black")
+            broadcastadresst.grid(column = 0, row = 6, columnspan = 7, sticky = "w")
+            broadcastadress.configure(text = str(bca1)+"."+str(bca2)+"."+str(bca3)+"."+str(bca4), fg = "black")
+            broadcastadress.grid(column = 4, row = 6, columnspan = 7, sticky = "w")
+            
             host = hosts(mask)
-            hostnumber.configure(text = "Maximum number of hosts per subnet: "+str(host) , fg = "black")
-            hostnumber.grid(column = 0, row = 6, columnspan= 7)
+            
+            hostnumbert.configure(text = "Maximum hosts per subnet: ", fg = "black")
+            hostnumbert.grid(column = 0, row = 7, columnspan= 7, sticky = "w")
+            hostnumber.configure(text = str(host) , fg = "black")
+            hostnumber.grid(column = 4, row = 7, columnspan= 7, sticky = "w")
 
     except ValueError:
         fullip.configure(text = "Invalid IP or bit mask number" , fg = "red")
-        fullip.grid(column = 0, row = 2, columnspan= 7)
+        fullip.grid(column = 0, row = 3, columnspan= 7)
         
 # Adding a button with blue text inside
 btn = Button(root, text = "Go!!!" , fg = "blue", command = clicked)
