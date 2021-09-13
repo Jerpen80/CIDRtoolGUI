@@ -149,7 +149,7 @@ def submask(mask):
             snm1 = 255
     return snm1,snm2,snm3,snm4
 
-# Calculating Network adress from ip adress and subnetmask with an AND operator
+# Calculating Network address from ip adress and subnetmask with an AND operator
 def netwadr(mask,snm1,snm2,snm3,snm4):
     if mask <= 8:
         nwa2 = 0
@@ -173,7 +173,7 @@ def netwadr(mask,snm1,snm2,snm3,snm4):
         nwa4 = int(ip4.get()) & snm4
     return nwa1, nwa2, nwa3, nwa4
 
-# Calculating Broadcast adress from subnet mask and ip adress with an OR operator
+# Calculating Broadcast address from subnet mask and ip adress with an OR operator
 def bcadr(mask,snm1,snm2,snm3,snm4):
     if mask <= 8:
         bca2 = 255
@@ -244,7 +244,7 @@ def clicked():
             
             nwa1,nwa2,nwa3,nwa4 = netwadr(mask,snm1,snm2,snm3,snm4)
             
-            networkadresst.configure(text = "Network adress is: ", fg = "black")
+            networkadresst.configure(text = "Network address is: ", fg = "black")
             networkadresst.grid(column = 0, row = 5, columnspan = 7, sticky = "w")
             networkadress.configure(text = str(nwa1)+"."+str(nwa2)+"."+str(nwa3)+"."+str(nwa4), fg = "black")
             networkadress.grid(column = 4, row = 5, columnspan = 7, sticky = "w")
