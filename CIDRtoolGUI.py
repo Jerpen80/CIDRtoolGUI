@@ -251,7 +251,7 @@ def clicked():
             
             bca1,bca2,bca3,bca4 = bcadr(mask,snm1,snm2,snm3,snm4)
             
-            broadcastadresst.configure(text = "Broadcast adress is: ", fg = "black")
+            broadcastadresst.configure(text = "Broadcast address is: ", fg = "black")
             broadcastadresst.grid(column = 0, row = 6, columnspan = 7, sticky = "w")
             broadcastadress.configure(text = str(bca1)+"."+str(bca2)+"."+str(bca3)+"."+str(bca4), fg = "black")
             broadcastadress.grid(column = 4, row = 6, columnspan = 7, sticky = "w")
